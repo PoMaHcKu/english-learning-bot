@@ -1,0 +1,73 @@
+databaseChangeLog:
+  -  changeSet:
+       id: 0_0_1_data_RP_0
+       author:  Roman Popov
+       changes:
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: NOUN
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: VERB_PRESENT
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: VERB_PAST
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: VERB_PARTICIPLE
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: VERB_ING
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: VERB_INF
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: ADVERB
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: ADJECTIVE
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: NUMERIC
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: PRONOUN
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: PRETEXT
+
+

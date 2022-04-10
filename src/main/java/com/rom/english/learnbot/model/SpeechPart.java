@@ -1,5 +1,22 @@
 package com.rom.english.learnbot.model;
 
-public enum SpeechPart {
-    NOUN, VERB, ADVERB, ADJECTIVE, PRONOUN, NUMERAL
+import lombok.*;
+
+import javax.persistence.*;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "speech_part")
+public class SpeechPart {
+
+    @Id
+    @GeneratedValue(generator = "speech_part_id_seq")
+    @EqualsAndHashCode.Exclude
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private SpeechPartNames name;
+
 }

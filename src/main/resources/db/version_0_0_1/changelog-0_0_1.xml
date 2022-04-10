@@ -1,0 +1,73 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0.0.1_RP_0" author="Roman Popov">
+        <createTable tableName="words">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="word" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="language" type="VARCHAR(5)" defaultValue="EN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0.0.1_RP_1" author="Roman Popov">
+        <createTable tableName="word_relation">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="source_word" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="source_word_words_id_reference"
+                             references="words(id)"
+                />
+            </column>
+            <column name="target_word" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="target_word_words_id_reference"
+                             references="words(id)"
+                />
+            </column>
+            <column name="type" type="VARCHAR(30)" defaultValue="EQUALS"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0.0.1_RP_2" author="Roman Popov">
+
+        <createTable tableName="speech_part">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(30)">
+                <constraints nullable="false"
+                             unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="words_speech_part">
+            <column name="word_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="word_id_words_id_reference"
+                             references="words(id)"
+                />
+            </column>
+            <column name="speech_part_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="speech_part_id_speech_part_id_reference"
+                             references="speech_part(id)"
+                />
+            </column>
+        </createTable>
+
+        <addUniqueConstraint tableName="words_speech_part"
+                             columnNames="word_id, speech_part_id"/>
+    </changeSet>
+
+</databaseChangeLog>

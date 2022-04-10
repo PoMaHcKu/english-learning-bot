@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -20,8 +21,11 @@ public class Word {
 
     private String word;
 
-    @Enumerated(EnumType.STRING)
-    private SpeechPart speechPart;
+    @ManyToMany
+    @JoinTable(name = "words_speech_part",
+            joinColumns = @JoinColumn(name = "word_id"),
+            inverseJoinColumns = @JoinColumn(name = "speech_part_id"))
+    private List<SpeechPart> speechPart;
 
     @Enumerated(EnumType.STRING)
     private Language language;
