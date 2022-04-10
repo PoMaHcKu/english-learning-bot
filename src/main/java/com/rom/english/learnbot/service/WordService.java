@@ -1,6 +1,7 @@
 package com.rom.english.learnbot.service;
 
 import com.rom.english.learnbot.dao.WordRepo;
+import com.rom.english.learnbot.exception.WordException;
 import com.rom.english.learnbot.model.Language;
 import com.rom.english.learnbot.model.Word;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class WordService {
     public Long getOrCreate(Word word) {
         String value = word.getWord();
         if (!StringUtils.hasText(value)) {
-            throw new IllegalArgumentException("Word can't be empty");
+            throw new WordException("Word can't be empty");
         }
         return wordRepo.findByWord(value)
                 .orElseGet(() -> wordRepo.save(word))
