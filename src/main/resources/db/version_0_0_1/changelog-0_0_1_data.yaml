@@ -69,5 +69,11 @@ databaseChangeLog:
                - column:
                    name: name
                    value: PRETEXT
+         - insert:
+             tableName: speech_part
+             columns:
+               - column:
+                   name: name
+                   value: PARTICLE
 
 

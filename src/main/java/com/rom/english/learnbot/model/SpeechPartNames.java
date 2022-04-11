@@ -11,7 +11,10 @@ public enum SpeechPartNames {
     ADJECTIVE(7, "Adjective"),
     NUMERIC(8, "Numeric"),
     PRONOUN(9, "Pronoun"),
-    PRETEXT(10, "Pretext");
+    PRETEXT(10, "Pretext"),
+    PARTICLE(11, "Particle"),
+    EXCLAMATION(12,"Exclamation"),
+    OTHER(13, "-");
 
     private final int index;
     private final String title;
