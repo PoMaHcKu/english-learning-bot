@@ -5,3 +5,10 @@ spring:
     url: ${SPRING_DATASOURCE_URL}
   liquibase:
     change-log: classpath:db/changelog-master.xml
+    enabled: false
+telegram:
+  bot:
+    api-url: ${TELEGRAM_BOT_API_URL}
+    webhook-path: ${TELEGRAM_BOT_WEBHOOK_PATH}
+    bot-name: ${TELEGRAM_BOT_NAME}
+    bot-token: ${TELEGRAM_BOT_TOKEN}
