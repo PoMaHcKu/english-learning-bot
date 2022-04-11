@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -25,12 +27,14 @@ public class WordReferenceService {
         Word sourceWord = wordReference.getSourceWord();
         Word targetWord = wordReference.getTargetWord();
 
-        List<SpeechPart> sourceSpeechPart = sourceWord.getSpeechParts().stream()
+        List<SpeechPart> sourceSpeechPart = Optional.ofNullable(sourceWord.getSpeechParts())
+                .orElse(Collections.emptyList()).stream()
                 .map(sp -> speechPartService.getByName(sp.getName()))
                 .collect(Collectors.toList());
         sourceWord.setSpeechParts(sourceSpeechPart);
 
-        List<SpeechPart> targetSpeechParts = targetWord.getSpeechParts().stream()
+        List<SpeechPart> targetSpeechParts = Optional.ofNullable(targetWord.getSpeechParts())
+                .orElse(Collections.emptyList()).stream()
                 .map(sp -> speechPartService.getByName(sp.getName()))
                 .collect(Collectors.toList());
         targetWord.setSpeechParts(targetSpeechParts);
