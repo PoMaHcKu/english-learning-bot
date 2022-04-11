@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -19,14 +18,13 @@ public class WordService {
     private final WordRepo wordRepo;
 
     @Transactional
-    public Long getOrCreate(Word word) {
+    public Word getOrCreate(Word word) {
         String value = word.getWord();
         if (!StringUtils.hasText(value)) {
             throw new WordException("Word can't be empty");
         }
         return wordRepo.findByWord(value)
-                .orElseGet(() -> wordRepo.save(word))
-                .getId();
+                .orElseGet(() -> wordRepo.save(word));
     }
 
     @Transactional(readOnly = true)
