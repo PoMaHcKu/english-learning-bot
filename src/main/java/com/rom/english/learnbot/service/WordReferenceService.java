@@ -25,28 +25,28 @@ public class WordReferenceService {
         Word sourceWord = wordReference.getSourceWord();
         Word targetWord = wordReference.getTargetWord();
 
-        List<SpeechPart> sourceSpeechPart = sourceWord.getSpeechPart().stream()
+        List<SpeechPart> sourceSpeechPart = sourceWord.getSpeechParts().stream()
                 .map(sp -> speechPartService.getByName(sp.getName()))
                 .collect(Collectors.toList());
-        sourceWord.setSpeechPart(sourceSpeechPart);
+        sourceWord.setSpeechParts(sourceSpeechPart);
 
-        List<SpeechPart> targetSpeechParts = targetWord.getSpeechPart().stream()
+        List<SpeechPart> targetSpeechParts = targetWord.getSpeechParts().stream()
                 .map(sp -> speechPartService.getByName(sp.getName()))
                 .collect(Collectors.toList());
-        targetWord.setSpeechPart(targetSpeechParts);
+        targetWord.setSpeechParts(targetSpeechParts);
 
         final Word finalSourceWord = wordService.getOrCreate(sourceWord);
         List<SpeechPart> sourceWordNewParts = sourceSpeechPart.stream()
-                .filter(sp -> !finalSourceWord.getSpeechPart().contains(sp))
+                .filter(sp -> !finalSourceWord.getSpeechParts().contains(sp))
                 .collect(Collectors.toList());
 
         final Word finalTargetWord = wordService.getOrCreate(targetWord);
         List<SpeechPart> targetWordNewParts = targetSpeechParts.stream()
-                .filter(sp -> !finalTargetWord.getSpeechPart().contains(sp))
+                .filter(sp -> !finalTargetWord.getSpeechParts().contains(sp))
                 .collect(Collectors.toList());
 
-        finalSourceWord.getSpeechPart().addAll(sourceWordNewParts);
-        finalTargetWord.getSpeechPart().addAll(targetWordNewParts);
+        finalSourceWord.getSpeechParts().addAll(sourceWordNewParts);
+        finalTargetWord.getSpeechParts().addAll(targetWordNewParts);
 
         return wordReferenceRepo.findBySourceWord_WordAndTargetWord_Word(finalSourceWord.getWord(), finalTargetWord.getWord())
                 .orElseGet(() -> {

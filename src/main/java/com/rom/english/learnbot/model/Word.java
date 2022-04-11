@@ -25,7 +25,7 @@ public class Word {
     @JoinTable(name = "words_speech_part",
             joinColumns = @JoinColumn(name = "word_id"),
             inverseJoinColumns = @JoinColumn(name = "speech_part_id"))
-    private List<SpeechPart> speechPart;
+    private List<SpeechPart> speechParts;
 
     @Enumerated(EnumType.STRING)
     private Language language;
