@@ -1,7 +1,9 @@
 package com.rom.english.learnbot.bot.keyboard;
 
+import com.rom.english.learnbot.bot.handler.MessageHandler;
+
 /**
- * It is used for handling by {@link com.rom.english.learnbot.bot.MessageHandler}
+ * It is used for handling by {@link MessageHandler}
  */
 public enum ButtonNames {
 

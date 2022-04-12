@@ -1,5 +1,7 @@
 package com.rom.english.learnbot.bot;
 
+import com.rom.english.learnbot.bot.handler.CallbackHandler;
+import com.rom.english.learnbot.bot.handler.MessageHandler;
 import lombok.Getter;
 import lombok.Setter;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;

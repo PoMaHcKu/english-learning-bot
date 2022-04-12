@@ -1,4 +1,4 @@
-package com.rom.english.learnbot.bot;
+package com.rom.english.learnbot.bot.handler;
 
 import com.rom.english.learnbot.bot.keyboard.ButtonNames;
 import com.rom.english.learnbot.bot.keyboard.ReplyKeyboardCreator;

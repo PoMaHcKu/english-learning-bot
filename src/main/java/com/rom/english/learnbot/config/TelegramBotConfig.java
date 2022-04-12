@@ -1,8 +1,8 @@
 package com.rom.english.learnbot.config;
 
-import com.rom.english.learnbot.bot.CallbackHandler;
+import com.rom.english.learnbot.bot.handler.CallbackHandler;
 import com.rom.english.learnbot.bot.EnglishLearnTelegramBot;
-import com.rom.english.learnbot.bot.MessageHandler;
+import com.rom.english.learnbot.bot.handler.MessageHandler;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
