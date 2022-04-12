@@ -45,6 +45,7 @@ public class DefaultWordReferenceUploader implements WordReferenceUploader {
                     String string = Objects.requireNonNull(response.body()).string();
                     System.out.println(string);
                 }
+                response.close();
             }
         });
     }
