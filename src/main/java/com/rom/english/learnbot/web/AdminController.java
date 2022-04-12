@@ -16,7 +16,7 @@ public class AdminController {
     private final WordReferenceService wordReferenceService;
 
     @PostMapping("upload-dictionary-item")
-    public ResponseEntity<Map<String, Long>> getAdminPage(@RequestBody WordReference wordReference) {
+    public ResponseEntity<Map<String, Long>> createDictionaryItem(@RequestBody WordReference wordReference) {
         Long newReference = wordReferenceService.createNewReference(wordReference);
         return ResponseEntity.ok(Map.of("id", newReference));
     }
