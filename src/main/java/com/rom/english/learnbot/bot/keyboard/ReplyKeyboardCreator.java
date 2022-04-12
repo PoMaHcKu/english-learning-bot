@@ -1,8 +1,10 @@
 package com.rom.english.learnbot.bot.keyboard;
 
+import com.rom.english.learnbot.bot.handler.CallbackQueryDataWrapper;
 import com.rom.english.learnbot.dto.Question;
 import com.rom.english.learnbot.model.Word;
-import org.json.JSONObject;
+import com.rom.english.protobuf.CallbackProto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -16,7 +18,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class ReplyKeyboardCreator {
+
+    private final CallbackQueryDataWrapper callbackQueryWrapper;
 
     /**
      * @return keyboard, that permanently shows under the text input
@@ -44,7 +49,7 @@ public class ReplyKeyboardCreator {
         Set<Word> answerWords = question.getAnswerWords();
 
         List<List<InlineKeyboardButton>> rows = answerWords.stream()
-                .map(w -> getButton(w, question.getRightAnswerId()))
+                .map(w -> getButton(w, question))
                 .collect(Collectors.toList());
         final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
         keyboardMarkup.setKeyboard(rows);
@@ -52,17 +57,22 @@ public class ReplyKeyboardCreator {
     }
 
     /**
-     * @param word using for creating button
-     * @param rightAnswerId using for creating callback data with right answer id
+     * @param word using for creating button and callback data
+     * @param question using for creating callback data
      * @return row of buttons
      */
-    private List<InlineKeyboardButton> getButton(Word word, Long rightAnswerId) {
+    private List<InlineKeyboardButton> getButton(Word word, Question question) {
+
+        CallbackProto.Callback callback = CallbackProto.Callback.newBuilder()
+                .setCommand(CallbackNames.CHECK_ANSWER.getTitle())
+                .setRightAnswer(question.getRightAnswerWord().getWord())
+                .setSelectedAnswerId(word.getId())
+                .setRightAnswerId(question.getRightAnswerWord().getId())
+                .build();
+
+        String callbackData = callbackQueryWrapper.encode(callback);
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(word.getWord());
-        JSONObject jsonQuestion = new JSONObject();
-        jsonQuestion.put("selectedId", word.getId());
-        jsonQuestion.put("right", rightAnswerId);
-        String callbackData = CallbackNames.CHECK_ANSWER.getTitle() + "_pl:" + jsonQuestion.toString();
         button.setCallbackData(callbackData);
 
         List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
