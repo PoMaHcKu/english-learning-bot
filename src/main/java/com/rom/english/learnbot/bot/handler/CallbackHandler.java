@@ -30,8 +30,9 @@ public class CallbackHandler {
 
     private BotApiMethod<?> checkAndSendAnswer(String chatId, CallbackProto.Callback data) {
         boolean isRight = data.getRightAnswerId() == data.getSelectedAnswerId();
-        String message = isRight ? "It's right, great!!!" : "It's incorrect, right answer is " + data.getRightAnswer();
+        String message = isRight ? "It's right, great!!!" : "It's incorrect, right answer - <b>" + data.getRightAnswer() + "</b>";
         SendMessage sendMessage = new SendMessage(chatId, message);
+        sendMessage.enableHtml(true);
         sendMessage.setReplyMarkup(keyboardCreator.getMainMenuKeyboard());
         return sendMessage;
     }
