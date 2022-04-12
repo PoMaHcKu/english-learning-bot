@@ -1,6 +1,5 @@
 package com.rom.english.learnbot.bot.keyboard;
 
-import com.rom.english.learnbot.bot.BotCommands;
 import com.rom.english.learnbot.dto.Question;
 import com.rom.english.learnbot.model.Word;
 import org.json.JSONObject;
@@ -19,9 +18,12 @@ import java.util.stream.Collectors;
 @Component
 public class ReplyKeyboardCreator {
 
+    /**
+     * @return keyboard, that permanently shows under the text input
+     */
     public ReplyKeyboardMarkup getMainMenuKeyboard() {
         KeyboardRow row1 = new KeyboardRow();
-        row1.add(new KeyboardButton(ButtonNameEnum.ONE_MORE_QUESTION.getTitle()));
+        row1.add(new KeyboardButton(ButtonNames.ONE_MORE_QUESTION.getTitle()));
 
         List<KeyboardRow> keyboard = new ArrayList<>();
         keyboard.add(row1);
@@ -35,24 +37,32 @@ public class ReplyKeyboardCreator {
         return replyKeyboardMarkup;
     }
 
+    /**
+     * @return keyboard with answers for a question
+     */
     public InlineKeyboardMarkup getQuestionKeyboard(Question question) {
         Set<Word> answerWords = question.getAnswerWords();
 
         List<List<InlineKeyboardButton>> rows = answerWords.stream()
-                .map(w -> getButton(w, question))
+                .map(w -> getButton(w, question.getRightAnswerId()))
                 .collect(Collectors.toList());
         final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
         keyboardMarkup.setKeyboard(rows);
         return keyboardMarkup;
     }
 
-    private List<InlineKeyboardButton> getButton(Word word, Question question) {
+    /**
+     * @param word using for creating button
+     * @param rightAnswerId using for creating callback data with right answer id
+     * @return row of buttons
+     */
+    private List<InlineKeyboardButton> getButton(Word word, Long rightAnswerId) {
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(word.getWord());
         JSONObject jsonQuestion = new JSONObject();
         jsonQuestion.put("selectedId", word.getId());
-        jsonQuestion.put("right", question.getRightAnswerId());
-        String callbackData = BotCommands.CHECK_ANSWER.getTitle() + "_pl:" + jsonQuestion.toString();
+        jsonQuestion.put("right", rightAnswerId);
+        String callbackData = CallbackNames.CHECK_ANSWER.getTitle() + "_pl:" + jsonQuestion.toString();
         button.setCallbackData(callbackData);
 
         List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();

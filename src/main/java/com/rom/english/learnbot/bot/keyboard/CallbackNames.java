@@ -1,12 +1,14 @@
 package com.rom.english.learnbot.bot.keyboard;
 
-public enum ButtonNameEnum {
-
-    ONE_MORE_QUESTION("One more question");
+/**
+ * It is used for handling by {@link com.rom.english.learnbot.bot.CallbackHandler}
+ */
+public enum CallbackNames {
+    CHECK_ANSWER("CA");
 
     private final String title;
 
-    ButtonNameEnum(String title) {
+    CallbackNames(String title) {
         this.title = title;
     }
 

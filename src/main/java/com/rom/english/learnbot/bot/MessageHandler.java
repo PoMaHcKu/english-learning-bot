@@ -1,9 +1,8 @@
 package com.rom.english.learnbot.bot;
 
-import com.rom.english.learnbot.bot.keyboard.ButtonNameEnum;
+import com.rom.english.learnbot.bot.keyboard.ButtonNames;
 import com.rom.english.learnbot.bot.keyboard.ReplyKeyboardCreator;
 import com.rom.english.learnbot.dto.Question;
-import com.rom.english.learnbot.model.Word;
 import com.rom.english.learnbot.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,7 @@ public class MessageHandler {
         String text = message.getText();
         String chatId = message.getChatId().toString();
 
-        if (text.equals(ButtonNameEnum.ONE_MORE_QUESTION.getTitle())) {
+        if (text.equals(ButtonNames.ONE_MORE_QUESTION.getTitle())) {
             Question randomQuestion = questionService.getRandomQuestion();
             SendMessage sendMessage = new SendMessage(chatId, randomQuestion.getQuestionWord().getWord());
             sendMessage.setReplyMarkup(keyboardCreator.getQuestionKeyboard(randomQuestion));

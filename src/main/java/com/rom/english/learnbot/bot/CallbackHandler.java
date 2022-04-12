@@ -1,5 +1,6 @@
 package com.rom.english.learnbot.bot;
 
+import com.rom.english.learnbot.bot.keyboard.CallbackNames;
 import com.rom.english.learnbot.bot.keyboard.ReplyKeyboardCreator;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ public class CallbackHandler {
 
         String data = callbackQuery.getData();
 
-        if (data.startsWith(BotCommands.CHECK_ANSWER.getTitle())) {
+        if (data.startsWith(CallbackNames.CHECK_ANSWER.getTitle())) {
             return checkAndSendAnswer(chatId, data);
         }
         return null;
