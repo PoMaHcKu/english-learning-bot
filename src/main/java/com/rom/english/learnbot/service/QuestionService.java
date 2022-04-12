@@ -27,6 +27,7 @@ public class QuestionService {
         return Question.builder()
                 .questionWord(randomReference.getSourceWord())
                 .answerWords(Set.of(wordCorrect, firstIncorrect, secondIncorrect))
+                .rightAnswerId(wordCorrect.getId())
                 .build();
     }
 }
