@@ -16,6 +16,5 @@ public class Question {
 
     private Word questionWord;
     private Set<Word> answerWords;
-    private Long rightAnswerId;
 
 }
