@@ -1,15 +1,18 @@
 package com.rom.english.learnbot.bot.handler;
 
+import com.google.protobuf.TextFormat;
 import com.rom.english.learnbot.bot.keyboard.CallbackNames;
 import com.rom.english.learnbot.bot.keyboard.ReplyKeyboardCreator;
+import com.rom.english.protobuf.CallbackProto;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class CallbackHandler {
 
@@ -27,18 +30,19 @@ public class CallbackHandler {
     }
 
     private BotApiMethod<?> checkAndSendAnswer(String chatId, String data) {
-        JSONObject payload = getPayload(data);
-        boolean isRight = payload.get("selectedId").equals(payload.get("right"));
-        String message = isRight ? "It's right, great!!!" : "It's incorrect, another time...";
+        CallbackProto.Callback payload = getPayload(data);
+        boolean isRight = payload.getRightAnswerId() == payload.getSelectedAnswerId();
+        String message = isRight ? "It's right, great!!!" : "It's incorrect, right answer is " + payload.getRightAnswer();
         SendMessage sendMessage = new SendMessage(chatId, message);
         sendMessage.setReplyMarkup(keyboardCreator.getMainMenuKeyboard());
         return sendMessage;
     }
 
-    private JSONObject getPayload(String data) {
-        String keyWord = "_pl:";
-        int i = data.indexOf(keyWord);
-        String jsonStr = data.substring(i + keyWord.length());
-        return new JSONObject(jsonStr);
+    private CallbackProto.Callback getPayload(String data) {
+        try {
+         return TextFormat.parse(data, CallbackProto.Callback.class);
+        } catch (TextFormat.ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }
