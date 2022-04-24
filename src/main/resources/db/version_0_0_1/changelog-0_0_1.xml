@@ -6,7 +6,7 @@
 
     <changeSet id="0.0.1_RP_0" author="Roman Popov">
         <createTable tableName="words">
-            <column autoIncrement="true" name="id" type="SERIAL">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
                 <constraints primaryKey="true"/>
             </column>
             <column name="word" type="VARCHAR(50)">
@@ -20,7 +20,7 @@
 
     <changeSet id="0.0.1_RP_1" author="Roman Popov">
         <createTable tableName="word_relation">
-            <column autoIncrement="true" name="id" type="SERIAL">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
                 <constraints primaryKey="true"/>
             </column>
             <column name="source_word" type="BIGINT">
@@ -42,7 +42,7 @@
     <changeSet id="0.0.1_RP_2" author="Roman Popov">
 
         <createTable tableName="speech_part">
-            <column name="id" type="SERIAL">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(30)">
