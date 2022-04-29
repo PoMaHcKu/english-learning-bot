@@ -37,7 +37,8 @@ public class MessageHandler {
         String chatId = message.getChatId().toString();
 
         if (text.equals(ButtonNames.ONE_MORE_QUESTION.getTitle())) {
-            UserPref pref = userPrefService.getByUserOrCreate(User.builder().id(message.getFrom().getId()).build());
+            User user = userServiceWrapper.getOrCreate(userHandler.getUser(message));
+            UserPref pref = userPrefService.getByUserOrCreate(user);
             Question question;
             if (pref.getSelectedGroup() != null) {
                 WordRelationGroup selectedGroup = pref.getSelectedGroup();
