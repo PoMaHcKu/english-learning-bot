@@ -11,5 +11,6 @@
     <include file="db/version_0_0_2/changelog-users-schema.xml"/>
     <include file="db/version_0_0_2/changelog-words-group-schema.xml"/>
     <include file="db/version_0_0_2/changelog-words-group-data.xml"/>
+    <include file="db/version_0_0_2/changelog-user-prefs-schema.xml"/>
 
 </databaseChangeLog>
