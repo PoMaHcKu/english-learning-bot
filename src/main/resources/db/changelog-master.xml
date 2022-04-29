@@ -7,6 +7,9 @@
     <!--### use id like "0.0.1_RP_5" - where 0.0.1 is app version, RP - your name, 5 - number of changeset -->
 
     <includeAll path="db/version_0_0_1"/>
-    <includeAll path="db/version_0_0_2"/>
+
+    <include file="db/version_0_0_2/changelog-users-schema.xml"/>
+    <include file="db/version_0_0_2/changelog-words-group-schema.xml"/>
+    <include file="db/version_0_0_2/changelog-words-group-data.xml"/>
 
 </databaseChangeLog>

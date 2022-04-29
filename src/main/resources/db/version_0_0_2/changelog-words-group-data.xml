@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0.0.2_RP_2" author="Roman Popov">
+        <createProcedure dbms="h2, postgresql"
+                         encoding="UTF-8"
+                         path="classpath:db/version_0_0_2/create_word_groups.sql"
+                         relativeToChangelogFile="false"
+                         schemaName="public"/>
+        <createProcedure dbms="h2, postgresql"
+                         encoding="UTF-8"
+                         path="classpath:db/version_0_0_2/divide_words.sql"
+                         relativeToChangelogFile="false"
+                         schemaName="public"/>
+        
+        <sql dbms="h2, postgresql">
+            call divide_words();
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
