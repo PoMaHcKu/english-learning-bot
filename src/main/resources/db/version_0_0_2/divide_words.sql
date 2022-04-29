@@ -17,12 +17,12 @@ begin
         loop
             is_exist_data :=
                         (select count(id)
-                         from bot_data.public.word_relation
+                         from public.word_relation
                          where id >= group_start
                            and id < group_end) > 0;
             if is_exist_data then
                 ids := (select array(select id
-                                     from bot_data.public.word_relation
+                                     from public.word_relation
                                      where id >= group_start
                                        and id < group_end));
                 call create_word_groups(ids, group_id);
