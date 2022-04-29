@@ -7,7 +7,10 @@ import com.rom.english.learnbot.bot.handler.MessageHandler;
  */
 public enum ButtonNames {
 
-    ONE_MORE_QUESTION("One more question");
+    ONE_MORE_QUESTION("One more question"),
+    SELECT_GROUPS("Select groups"),
+    RETURN_TO_MAIN_PAGE("Return to main page"),
+    CONFIG("Open config");
 
     private final String title;
 

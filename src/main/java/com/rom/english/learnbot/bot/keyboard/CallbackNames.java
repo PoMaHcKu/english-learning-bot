@@ -6,7 +6,8 @@ import com.rom.english.learnbot.bot.handler.CallbackHandler;
  * It is used for handling by {@link CallbackHandler}
  */
 public enum CallbackNames {
-    CHECK_ANSWER("CA");
+    CHECK_ANSWER("CA"),
+    SET_GROUP("SG");
 
     private final String title;
 

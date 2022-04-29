@@ -4,8 +4,8 @@ import com.rom.english.protobuf.CallbackProto;
 
 public interface CallbackQueryDataWrapper {
 
-    String encode(CallbackProto.Callback data);
+    String encode(CallbackProto.Payload data);
 
-    CallbackProto.Callback decode(String data);
+    CallbackProto.Payload decode(String data);
 
 }

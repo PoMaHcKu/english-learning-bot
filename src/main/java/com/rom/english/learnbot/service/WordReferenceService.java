@@ -66,4 +66,7 @@ public class WordReferenceService {
         return wordReferenceRepo.getRandomWordReference("en");
     }
 
+    public WordReference getRandomReferenceFromGroup(Long groupId) {
+        return wordReferenceRepo.getRandomWordReference("en", groupId);
+    }
 }

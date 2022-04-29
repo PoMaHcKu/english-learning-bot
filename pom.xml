@@ -44,8 +44,8 @@
 
         <dependency>
             <groupId>com.rom.english.protobuf</groupId>
-            <artifactId>models</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>english-bot-protobuf-utils</artifactId>
+            <version>0.1.0</version>
         </dependency>
 
         <dependency>

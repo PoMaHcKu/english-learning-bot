@@ -15,7 +15,7 @@ public class CallbackQueryBase64DataWrapper implements CallbackQueryDataWrapper 
     private final Base64.Encoder encoder = Base64.getEncoder();
 
     @Override
-    public String encode(CallbackProto.Callback data) {
+    public String encode(CallbackProto.Payload data) {
         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             data.writeTo(out);
             return encoder.encodeToString(out.toByteArray());
@@ -25,10 +25,10 @@ public class CallbackQueryBase64DataWrapper implements CallbackQueryDataWrapper 
     }
 
     @Override
-    public CallbackProto.Callback decode(String data) {
+    public CallbackProto.Payload decode(String data) {
         byte[] bytes = decoder.decode(data);
         try {
-            return CallbackProto.Callback.parseFrom(bytes);
+            return CallbackProto.Payload.parseFrom(bytes);
         } catch (InvalidProtocolBufferException e) {
             throw new RuntimeException("Byte reading exception", e);
         }

@@ -20,4 +20,11 @@ public interface WordReferenceRepo extends CrudRepository<WordReference, Long> {
 
     @Query(value = "select * from word_relation order by random() limit 1", nativeQuery = true)
     WordReference getRandomWordReference(String language);
+
+    @Query(value = """
+            select * from word_relation wr 
+            where wr.id in (select wgw.word_id from words_group_words wgw where wgw.words_group_id = 5)
+             order by random() limit 1
+            """, nativeQuery = true)
+    WordReference getRandomWordReference(String language, Long groupId);
 }
