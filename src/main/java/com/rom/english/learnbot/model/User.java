@@ -18,7 +18,6 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    @GeneratedValue(generator = "bot_user_id_seq")
     private Long id;
 
     @Column(name = "first_name")
