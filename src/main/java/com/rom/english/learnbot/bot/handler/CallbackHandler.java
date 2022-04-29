@@ -26,6 +26,7 @@ public class CallbackHandler {
 
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery callbackQuery) {
+
         final String chatId = callbackQuery.getMessage().getChatId().toString();
 
         String data = callbackQuery.getData();
