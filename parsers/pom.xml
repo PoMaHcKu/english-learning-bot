@@ -11,6 +11,7 @@
     <modules>
         <module>parsers-core</module>
         <module>parsers-englishvoyage</module>
+        <module>parsers-excel</module>
     </modules>
 
     <dependencies>

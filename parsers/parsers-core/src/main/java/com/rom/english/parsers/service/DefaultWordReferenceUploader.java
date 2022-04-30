@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class DefaultWordReferenceUploader implements WordReferenceUploader {
 
-    private static final String url = "http://localhost:8080/api/admin/upload-dictionary-item";
+    private static final String url = "http://localhost:8080/api/admin/upload-dictionary-item?groupTitle=LEON";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private final OkHttpClient httpClient;
