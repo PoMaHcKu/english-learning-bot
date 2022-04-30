@@ -46,6 +46,11 @@ public class MessageHandler {
             } else {
                 question = questionService.getRandomQuestion();
             }
+            if (question == null) {
+                SendMessage sendMessage = new SendMessage(chatId, "There aren't any questions in selected group.");
+                sendMessage.setReplyMarkup(keyboardCreator.getMainMenuKeyboard());
+                return sendMessage;
+            }
             SendMessage sendMessage = new SendMessage(chatId, question.getQuestionWord().getWord());
             sendMessage.setReplyMarkup(keyboardCreator.getQuestionKeyboard(question));
             return sendMessage;

@@ -23,7 +23,7 @@ public class WordRelationGroup {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "words_group_words",
-            joinColumns = @JoinColumn(name = "word_id"),
-            inverseJoinColumns = @JoinColumn(name = "words_group_id"))
+            joinColumns = @JoinColumn(name = "words_group_id"),
+            inverseJoinColumns = @JoinColumn(name = "word_id"))
     private Set<WordReference> words;
 }

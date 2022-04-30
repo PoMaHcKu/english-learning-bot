@@ -23,7 +23,7 @@ public class WordReferenceService {
     private final WordService wordService;
 
     @Transactional
-    public Long createNewReference(WordReference wordReference) {
+    public WordReference createNewReference(WordReference wordReference) {
         Word sourceWord = wordReference.getSourceWord();
         Word targetWord = wordReference.getTargetWord();
 
@@ -57,8 +57,7 @@ public class WordReferenceService {
                     wordReference.setSourceWord(finalSourceWord);
                     wordReference.setTargetWord(finalTargetWord);
                     return wordReferenceRepo.save(wordReference);
-                })
-                .getId();
+                });
     }
 
     @Transactional(readOnly = true)
@@ -67,6 +66,6 @@ public class WordReferenceService {
     }
 
     public WordReference getRandomReferenceFromGroup(Long groupId) {
-        return wordReferenceRepo.getRandomWordReference("en", groupId);
+        return wordReferenceRepo.getRandomWordReference(groupId);
     }
 }

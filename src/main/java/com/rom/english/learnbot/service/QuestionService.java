@@ -34,6 +34,9 @@ public class QuestionService {
     }
 
     private Question makeQuestion(WordReference randomReference) {
+        if (randomReference == null) {
+            return null;
+        }
         Word wordCorrect = randomReference.getTargetWord();
         Word firstIncorrect = wordService.getRandomWord(Language.RU, wordCorrect.getId());
         Word secondIncorrect = wordService.getRandomWord(Language.RU, firstIncorrect.getId(), wordCorrect.getId());
